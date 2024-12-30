@@ -48,6 +48,10 @@ jobs:
                 client-id: ${{secrets.AZURE_CLIENT_ID}}
                 tenant-id: ${{secrets.AZURE_TENANT_ID}}
                 subscription-id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+            - name: Deploy to Azure App Service
+              run: |
+                 JAR_FILE=$(find demo-service/target -name "*.jar")
+                 az webapp deploy --name springbootdemo-service --resource-group springboot-demo-rg -type jar --src-path 
 
 
 
