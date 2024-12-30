@@ -26,3 +26,17 @@ jobs:
               with: 
                 name: demo-service-jar
                 path: demo-service/target/*.jar
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Download artifact from build job
+              uses: actions/download-artifact@v4
+              with:
+                name: demo-service-jar
+            - name: Deploy to Azure App Service
+              uses: azure/webapps-deploy@v2
+              with:
+                app-name: demo-service-jar
+                publish-profile: ${{secrets.AZUREWEBAPPPUBLISHPROFILE}}
+                package: '*.jar'
