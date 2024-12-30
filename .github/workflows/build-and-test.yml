@@ -29,6 +29,7 @@ jobs:
                 path: demo-service/target/*.jar
     deploy:
         runs-on: ubuntu-latest
+        environment: prod
         needs: build
         steps:
             - name: Download artifact from build job
