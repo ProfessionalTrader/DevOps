@@ -20,4 +20,4 @@ jobs:
                 cache-dependency-path: ./demo-service/pom.xml
             - name: Build application
               working-directory: ./demo-service
-              run: mvn clean verify --file demo-service/pom.xml --batch-mode -Dmin.coverage=0.00
+              run: mvn clean verify --file pom.xml --batch-mode -Dmin.coverage=0.00
