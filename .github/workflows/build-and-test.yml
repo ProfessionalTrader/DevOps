@@ -1,5 +1,5 @@
 name: build and test
-run-name: build and test ${{inputs.service}} on ${{inputs.branch}}
+run-name: build and test app
 
 on:
     push:
@@ -21,3 +21,8 @@ jobs:
             - name: Build application
               working-directory: ./demo-service
               run: mvn clean verify --file pom.xml --batch-mode -Dmin.coverage=0.00
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with: 
+                name: demo-service-artifact
+                path: ${{github.workspace}}/target/*.jar
