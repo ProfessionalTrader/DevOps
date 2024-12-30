@@ -1,0 +1,23 @@
+name: build and test
+run-name: build and test ${{inputs.service}} on ${{inputs.branch}}
+
+on:
+    push:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout sources
+              uses: actions/checkout@v4
+            - name: Set up JDK 17
+              uses: actions/setup-java@v4
+              with: 
+                java-version: 17
+                distribution: microsoft
+                server-id: github
+                cache: maven
+                cache-dependency-path: ./demo-service/pom.xml
+            - name: Build application
+              working-directory: ./demo-service
+              run: mvn clean verify --file demo-service/pom.xml --batch-mode -Dmin.coverage=0.00
